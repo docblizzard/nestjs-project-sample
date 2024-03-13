@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Get, Param, Res, Post, HttpStatus  } from "@nestjs/common";
 import { Response } from "express";
-import { userService } from "./user.service";
+import { userService } from "../services/user.service";
 
 @Controller('/user')
 export class userController{
@@ -12,7 +12,6 @@ export class userController{
         return this.userService.getUser(username);
     }
 
-    
     @Post()
     postUser(@Body('username') username: string, @Res() res: Response):
     {username: string; createdAt: Date}{
