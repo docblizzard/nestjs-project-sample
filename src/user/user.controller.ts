@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Get, Param, Res, Post, HttpStatus  } from "@nestjs/common";
 import { Response } from "express";
-import { userService } from "../services/user.service";
+import { userService } from "./user.service";
 
 @Controller('/user')
 export class userController{

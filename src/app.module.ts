@@ -1,15 +1,17 @@
 /* eslint-disable prettier/prettier */
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 
-import { AppService } from '../services/app.service';
-import { AppController } from 'src/controllers/app.controller';
-import { AuthModule } from './auth.module';
+import { AppService } from './app.service';
+import { AppController } from 'src/app.controller';
+import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware, logger } from 'src/middlewares/logger.middleware';
-import { authController } from 'src/controllers/auth.controller';
+import { authController } from 'src/auth/auth.controller';
 import { RegisterMiddleware } from 'src/middlewares/register.middleware';
+import { TokenMiddleware } from 'src/middlewares/token.middleware';
+import { ConfigModule } from './config/config.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [ConfigModule.register({folder: './config'})],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -25,5 +27,9 @@ export class AppModule implements NestModule{
       consumer
           .apply(RegisterMiddleware)
           .forRoutes('auth/register');
+
+      consumer
+          .apply(TokenMiddleware)
+          .forRoutes('auth/users');
   }
 }

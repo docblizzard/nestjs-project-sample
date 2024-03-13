@@ -1,8 +1,8 @@
-import { AuthService } from "src/services/auth.service";
+import { AuthService } from "src/auth/auth.service";
 import { Response } from "express";
 import { Body, Controller, Get, HttpException, HttpStatus, Post } from "@nestjs/common";
 import { Http2ServerResponse } from "http2";
-import { TokenService } from "src/services/token.service";
+import { TokenService } from "src/token/token.service";
 
 @Controller('/auth')
 export class authController {
